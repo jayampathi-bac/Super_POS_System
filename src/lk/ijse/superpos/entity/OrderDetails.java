@@ -15,62 +15,52 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
-    /**
-     * @return the orderID_PK
-     */
+    public OrderDetails(String orderID_PK, String itemCode_PK, int qty, double unitPrice) {
+        this.orderID_PK = orderID_PK;
+        this.itemCode_PK = itemCode_PK;
+        this.qty = qty;
+        this.unitPrice = unitPrice;
+    }
+
     public String getOrderID_PK() {
         return orderID_PK;
     }
 
-    /**
-     * @param orderID_PK the orderID_PK to set
-     */
     public void setOrderID_PK(String orderID_PK) {
         this.orderID_PK = orderID_PK;
     }
 
-    /**
-     * @return the itemCode_PK
-     */
     public String getItemCode_PK() {
         return itemCode_PK;
     }
 
-    /**
-     * @param itemCode_PK the itemCode_PK to set
-     */
     public void setItemCode_PK(String itemCode_PK) {
         this.itemCode_PK = itemCode_PK;
     }
 
-    /**
-     * @return the qty
-     */
     public int getQty() {
         return qty;
     }
 
-    /**
-     * @param qty the qty to set
-     */
     public void setQty(int qty) {
         this.qty = qty;
     }
 
-    /**
-     * @return the unitPrice
-     */
     public double getUnitPrice() {
         return unitPrice;
     }
 
-    /**
-     * @param unitPrice the unitPrice to set
-     */
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-   
-    
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "orderID_PK='" + orderID_PK + '\'' +
+                ", itemCode_PK='" + itemCode_PK + '\'' +
+                ", qty=" + qty +
+                ", unitPrice=" + unitPrice +
+                '}';
+    }
 }

@@ -12,14 +12,15 @@ import lk.ijse.superpos.dao.custom.CustomerDAO;
 import lk.ijse.superpos.dao.custom.QueryDAO;
 import lk.ijse.superpos.entity.CustomEntity;
 import lk.ijse.superpos.entity.Customer;
+import lk.ijse.superpos.entity.Item;
 import lk.ijse.superpos.model.CustomDTO;
 import lk.ijse.superpos.model.CustomerDTO;
 
 
 public class CustomerBOImpl implements CustomerBO {
 
-    CustomerDAO dao;
-    QueryDAO qdao;
+    private final CustomerDAO dao;
+    private final QueryDAO qdao;
 
     public CustomerBOImpl() {
         dao = (CustomerDAO) DAOFactory.getDAOfac().getDAO(DAOFactory.DAOFactypes.CUSTOMER);
@@ -30,6 +31,11 @@ public class CustomerBOImpl implements CustomerBO {
     public boolean addCustomer(CustomerDTO dto) throws Exception {
         Customer customer = new Customer(dto.getId(), dto.getName(), dto.getAddress(), dto.getSalary());
         return dao.add(customer);
+    }
+
+    @Override
+    public boolean updateCustomer(CustomerDTO dto) throws Exception {
+        return dao.update(new Customer(dto.getId(), dto.getName(), dto.getAddress(), dto.getSalary()));
     }
 
     @Override

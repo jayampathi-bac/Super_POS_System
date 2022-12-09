@@ -14,48 +14,42 @@ public class Orders {
     public Orders() {
     }
 
-    /**
-     * @return the id_PK
-     */
+    public Orders(String id_PK, String date, String customer_ID_FK) {
+        this.id_PK = id_PK;
+        this.date = date;
+        this.customer_ID_FK = customer_ID_FK;
+    }
+
     public String getId_PK() {
         return id_PK;
     }
 
-    /**
-     * @param id_PK the id_PK to set
-     */
     public void setId_PK(String id_PK) {
         this.id_PK = id_PK;
     }
 
-    /**
-     * @return the date
-     */
     public String getDate() {
         return date;
     }
 
-    /**
-     * @param date the date to set
-     */
     public void setDate(String date) {
         this.date = date;
     }
 
-    /**
-     * @return the customer_ID_FK
-     */
     public String getCustomer_ID_FK() {
         return customer_ID_FK;
     }
 
-    /**
-     * @param customer_ID_FK the customer_ID_FK to set
-     */
     public void setCustomer_ID_FK(String customer_ID_FK) {
         this.customer_ID_FK = customer_ID_FK;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id_PK='" + id_PK + '\'' +
+                ", date='" + date + '\'' +
+                ", customer_ID_FK='" + customer_ID_FK + '\'' +
+                '}';
+    }
 }

@@ -25,7 +25,7 @@ public class StartUp extends Application {
         Scene mainScene = new Scene(root);
         
         primaryStage.setScene(mainScene);
-        primaryStage.setTitle("IJSE FX POS - 2018 - Internship");
+        primaryStage.setTitle("SUPER POS System");
         primaryStage.setResizable(false);
         primaryStage.show();
         primaryStage.centerOnScreen();

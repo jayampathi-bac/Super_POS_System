@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lk.ijse.superpos.entity;
+package lk.ijse.superpos.view.util.tblmodel;
 
 
-public class Item {
-    private String code_PK;
+public class ItemTM {
+
+    private String code;
     private String description;
-    private int qtyOnHand;
+    private int qty;
     private double unitPrice;
 
-    public Item() {
+    public ItemTM() {
     }
 
-    public Item(String code_PK, String description, int qtyOnHand, double unitPrice) {
-        this.code_PK = code_PK;
+    public ItemTM(String code, String description, int qty, double unitPrice) {
+        this.code = code;
         this.description = description;
-        this.qtyOnHand = qtyOnHand;
+        this.qty = qty;
         this.unitPrice = unitPrice;
     }
 
-    public String getCode_PK() {
-        return code_PK;
+    public String getCode() {
+        return code;
     }
 
-    public void setCode_PK(String code_PK) {
-        this.code_PK = code_PK;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -38,12 +39,12 @@ public class Item {
         this.description = description;
     }
 
-    public int getQtyOnHand() {
-        return qtyOnHand;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQtyOnHand(int qtyOnHand) {
-        this.qtyOnHand = qtyOnHand;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public double getUnitPrice() {
@@ -56,10 +57,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "code_PK='" + code_PK + '\'' +
+        return "ItemTM{" +
+                "code='" + code + '\'' +
                 ", description='" + description + '\'' +
-                ", qtyOnHand=" + qtyOnHand +
+                ", qty=" + qty +
                 ", unitPrice=" + unitPrice +
                 '}';
     }

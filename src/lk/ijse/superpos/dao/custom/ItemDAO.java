@@ -9,6 +9,7 @@ import lk.ijse.superpos.dao.CrudDAO;
 import lk.ijse.superpos.entity.Item;
 
 
-public interface ItemDAO extends CrudDAO<Item, String>{
-    void getAllItems();
+public interface ItemDAO extends CrudDAO<Item, String> {
+    //    void getAllItems();
+    boolean updateItemQtyOnHand(String code, int qtyOnHand) throws Exception;
 }

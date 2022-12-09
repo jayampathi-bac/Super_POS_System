@@ -21,7 +21,7 @@
     </stylesheets>
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="618.0" />
-      <Label id="lblMainNav" layoutX="21.0" layoutY="19.0" onMouseClicked="#navigateToMain" text="IJSE FX POS" textFill="WHITE">
+      <Label id="lblMainNav" layoutX="21.0" layoutY="19.0" onMouseClicked="#navigateToMain" text="Menu" textFill="WHITE">
          <effect>
             <Glow level="0.78" />
          </effect>

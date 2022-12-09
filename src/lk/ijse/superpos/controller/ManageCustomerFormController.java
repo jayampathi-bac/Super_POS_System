@@ -1,14 +1,7 @@
-   package lk.ijse.superpos.controller;
+package lk.ijse.superpos.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,11 +20,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.superpos.business.BOFactory;
 import lk.ijse.superpos.business.custom.CustomerBO;
-import lk.ijse.superpos.view.util.tblmodel.CustomerTM;
 import lk.ijse.superpos.model.CustomerDTO;
+import lk.ijse.superpos.model.ItemDTO;
+import lk.ijse.superpos.view.util.tblmodel.CustomerTM;
 
-public class    ManageCustomerFormController implements Initializable {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class ManageCustomerFormController implements Initializable {
+
+    private final CustomerBO cusBO;
     @FXML
     private JFXTextField txtID;
     @FXML
@@ -42,14 +45,16 @@ public class    ManageCustomerFormController implements Initializable {
     private JFXTextField txtSalary;
     @FXML
     private TableView<CustomerTM> tblCustomers;
-
     private boolean update = false;
     @FXML
     private JFXButton btnDelete;
 
+    public ManageCustomerFormController() {
+        this.cusBO = (CustomerBO) BOFactory.getBOFactory().getBO(BOFactory.BOFacTypes.CUSTOMER);
+    }
+
     private void loadAllCustomers() throws SQLException {
         try {
-            CustomerBO cusBO = (CustomerBO) BOFactory.getBOFactory().getBO(BOFactory.BOFacTypes.CUSTOMER);
             ArrayList<CustomerDTO> all = cusBO.getAllCustomers();
             ArrayList<CustomerTM> custoemrTMAll = new ArrayList<>();
             for (CustomerDTO customer : all) {
@@ -135,13 +140,14 @@ public class    ManageCustomerFormController implements Initializable {
             String name = txtName.getText();
             String address = txtAddress.getText();
             double salary = Double.parseDouble(txtSalary.getText());
-            CustomerBO cusBO = (CustomerBO) BOFactory.getBOFactory().getBO(BOFactory.BOFacTypes.CUSTOMER);
-            
+
+
             CustomerDTO cus = new CustomerDTO(id, name, address, salary);
             boolean add = cusBO.addCustomer(cus);
             if (add) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Done", ButtonType.OK);
                 a.show();
+                loadAllCustomers();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "Falied", ButtonType.OK);
                 a.show();
@@ -152,11 +158,25 @@ public class    ManageCustomerFormController implements Initializable {
         }
     }
 
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        try {
+            CustomerDTO cus = new CustomerDTO(txtID.getText(), txtName.getText(), txtAddress.getText(), Double.parseDouble(txtSalary.getText()));
+            boolean b = cusBO.updateCustomer(cus);
+            if (b) {
+                loadAllCustomers();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to update the customer", ButtonType.OK).show();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ManageCustomerFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
     private void btnDeleteOnAction(ActionEvent event) throws SQLException {
         try {
-            CustomerBO cusBO = (CustomerBO) BOFactory.getBOFactory().getBO(BOFactory.BOFacTypes.CUSTOMER);
-            
             boolean delete = cusBO.deleteCustomer(txtID.getText());
             if (delete) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer has been deleted successfully", ButtonType.OK);
@@ -170,7 +190,7 @@ public class    ManageCustomerFormController implements Initializable {
                 alert.setHeaderText("Failed to Delete!");
                 alert.showAndWait();
             }
-            
+
             btnNewCustomerOnAction(event);
         } catch (Exception ex) {
             Logger.getLogger(ManageCustomerFormController.class.getName()).log(Level.SEVERE, null, ex);

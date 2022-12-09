@@ -75,9 +75,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             if (i > 0) {
                 return true;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;

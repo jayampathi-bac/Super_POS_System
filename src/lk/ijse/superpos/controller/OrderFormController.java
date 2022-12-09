@@ -163,8 +163,8 @@ public class OrderFormController implements Initializable {
 
                     if (rst.next()) {
                         String description = rst.getString(2);
-                        double unitPrice = rst.getDouble(3);
-                        int qtyOnHand = rst.getInt(4);
+                        int qtyOnHand = rst.getInt(3);
+                        double unitPrice = rst.getDouble(4);
 
                         txtDescription.setText(description);
                         txtUnitPrice.setText(unitPrice + "");
@@ -303,8 +303,8 @@ public class OrderFormController implements Initializable {
             String sql = "INSERT INTO Orders VALUES (?,?,?)";
             PreparedStatement pstm = connection.prepareStatement(sql);
             pstm.setObject(1, txtOrderID.getText());
-//            pstm.setObject(2, parseDate(txtOrderDate.getEditor().getText()));
-            pstm.setObject(2, "2018");
+            pstm.setObject(2, parseDate(txtOrderDate.getEditor().getText()));
+//            pstm.setObject(2, "2018");
             pstm.setObject(3, cmbCustomerID.getSelectionModel().getSelectedItem());
             int affectedRows = pstm.executeUpdate();
 
@@ -353,7 +353,7 @@ public class OrderFormController implements Initializable {
             }
 
             connection.commit();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Wadea Goada", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Payment Successful", ButtonType.OK);
             alert.show();
 
         } catch (SQLException ex) {
@@ -363,6 +363,8 @@ public class OrderFormController implements Initializable {
                 Logger.getLogger(OrderFormController.class.getName()).log(Level.SEVERE, null, ex1);
             }
             Logger.getLogger(OrderFormController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 connection.setAutoCommit(true);
@@ -373,10 +375,19 @@ public class OrderFormController implements Initializable {
 
     }
 
-    private Date parseDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private String parseDate(String oldDateString) throws ParseException {
         try {
-            return sdf.parse(date);
+            final String OLD_FORMAT = "dd/MM/yyyy";
+            final String NEW_FORMAT = "yyyy-MM-dd";
+
+            String newDateString;
+
+            SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+            Date d = sdf.parse(oldDateString);
+            sdf.applyPattern(NEW_FORMAT);
+            newDateString = sdf.format(d);
+            return newDateString;
+
         } catch (ParseException ex) {
 
             Logger.getLogger(OrderFormController.class.getName()).log(Level.SEVERE, null, ex);

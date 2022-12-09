@@ -5,31 +5,59 @@
  */
 package lk.ijse.superpos.business.custom.impl;
 
-import java.util.ArrayList;
 import lk.ijse.superpos.business.custom.ItemBO;
+import lk.ijse.superpos.dao.DAOFactory;
+import lk.ijse.superpos.dao.custom.ItemDAO;
+import lk.ijse.superpos.dao.custom.QueryDAO;
+import lk.ijse.superpos.entity.Item;
 import lk.ijse.superpos.model.ItemDTO;
 
+import java.util.ArrayList;
 
-public class ItemBOImpl implements ItemBO{
+
+public class ItemBOImpl implements ItemBO {
+
+    private final ItemDAO itemDAO;
+
+    private final QueryDAO queryDAO;
+
+    public ItemBOImpl() {
+        itemDAO = (ItemDAO) DAOFactory.getDAOfac().getDAO(DAOFactory.DAOFactypes.ITEM);
+        queryDAO = (QueryDAO) DAOFactory.getDAOfac().getDAO(DAOFactory.DAOFactypes.QUERYDAO);
+    }
+
 
     @Override
     public boolean addItem(ItemDTO dto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Item item = new Item(dto.getCode(), dto.getDescription(), dto.getQty(), dto.getUnitPrice());
+        return itemDAO.add(item);
     }
 
     @Override
     public boolean deleteItem(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return itemDAO.delete(id);
     }
 
     @Override
-    public ItemDTO serchItem(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateItem(ItemDTO item) throws Exception {
+        return itemDAO.update(new Item(item.getCode(), item.getDescription(), item.getQty(), item.getUnitPrice()));
     }
 
     @Override
-    public ArrayList<ItemDTO> getAllItem() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ItemDTO searchItem(String id) throws Exception {
+        Item itm = itemDAO.Serch(id);
+        return new ItemDTO(itm.getCode_PK(), itm.getDescription(), itm.getQtyOnHand(), itm.getUnitPrice());
     }
-    
+
+    @Override
+    public ArrayList<ItemDTO> getAllItems() throws Exception {
+        ArrayList<Item> all = itemDAO.getAll();
+        ArrayList<ItemDTO> allItems = new ArrayList<>();
+        for (Item item : all) {
+            ItemDTO dto = new ItemDTO(item.getCode_PK(), item.getDescription(), item.getQtyOnHand(), item.getUnitPrice());
+            allItems.add(dto);
+        }
+        return allItems;
+    }
+
 }
