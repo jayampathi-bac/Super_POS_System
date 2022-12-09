@@ -14,6 +14,7 @@ import lk.ijse.superpos.dao.CrudUtil;
 import lk.ijse.superpos.entity.CustomEntity;
 import lk.ijse.superpos.dao.custom.QueryDAO;
 
+
 public class QueryDAOImpl implements QueryDAO {
 
     @Override

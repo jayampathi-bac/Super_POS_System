@@ -5,10 +5,7 @@
  */
 package lk.ijse.superpos.view.util.tblmodel;
 
-/**
- *
- * @author ranjith-suranga
- */
+
 public class OrderDetailTM {
     
     private String itemCode;

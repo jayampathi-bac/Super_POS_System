@@ -25,12 +25,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.superpos.service.BOFactory;
-import lk.ijse.superpos.service.custom.CustomerBO;
+import lk.ijse.superpos.business.BOFactory;
+import lk.ijse.superpos.business.custom.CustomerBO;
 import lk.ijse.superpos.view.util.tblmodel.CustomerTM;
 import lk.ijse.superpos.model.CustomerDTO;
 
-public class ManageCustomerFormController implements Initializable {
+public class    ManageCustomerFormController implements Initializable {
 
     @FXML
     private JFXTextField txtID;

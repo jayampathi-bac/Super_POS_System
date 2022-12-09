@@ -108,7 +108,7 @@ public class OrderFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/superpos", "root", "root");
             loadAllData();
         } catch (SQLException ex) {
             Logger.getLogger(OrderFormController.class.getName()).log(Level.SEVERE, null, ex);
