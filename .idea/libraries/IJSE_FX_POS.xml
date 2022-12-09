@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="IJSE FX POS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/IJSE FX POS.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
